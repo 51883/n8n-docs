@@ -1,9 +1,11 @@
 site_name: n8n Docs
 site_url: https://www.n8ndocs.com/
 site_description: Documentation for n8n, a workflow automation platform.
-# Must be the docs repo for the edit page buttons to work
+
+# 如果你要让 “在 GitHub 上编辑此页” 按钮可用，请换成你的仓库
 repo_url: https://github.com/n8n-io/n8n-docs
 edit_uri: edit/main/docs/
+
 validation:
   nav:
     omitted_files: warn
@@ -14,6 +16,7 @@ validation:
     anchors: warn
     absolute_links: relative_to_docs
     unrecognized_links: warn
+
 theme:
   name: material
   custom_dir: _overrides
@@ -24,40 +27,26 @@ theme:
   palette:
     scheme: light
   features:
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-header/#announcement-bar
     - announce.dismiss
-    # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#code-actions
     - content.action.edit
-    # https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#code-annotations
     - content.code.annotate
-    # https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#linked-content-tabs
     - content.tabs.link
-    # https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#code-copy-button
     - content.code.copy
-    # https://squidfunk.github.io/mkdocs-material/reference/tooltips/#improved-tooltips
     - content.tooltips
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/?h=footer#navigation
     - navigation.footer
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#section-index-pages
     - navigation.indexes
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-path
     - navigation.path
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-sections
     - navigation.sections
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/?h=navigation+tabs#navigation-tabs
     - navigation.tabs
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#back-to-top-button
     - navigation.top
-    # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/?h=navigation+tabs#anchor-tracking
     - navigation.tracking
+
 extra:
   analytics:
     provider: google
     property: G-0SC4FF2FH9
-  # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
     beta: This feature is in beta
-  # Additional YAML for n8n-specific templates and functionality
   n8n_extra:
     feedback:
       question: This page was
@@ -66,81 +55,60 @@ extra:
       comment_input_placeholder: This page needs...
       comment_input_hint: We read all feedback personally
       thankyou_message: Thanks for your feedback!
-# https://squidfunk.github.io/mkdocs-material/customization/?h=#additional-css
-extra_css:
-  - _extra/css/extra.css
-  - _extra/css/macro-styles.css
-  - _extra/css/templates-widget.css
-  - _extra/css/workflow-demo.css
-  - _extra/css/feedback.css
-# https://squidfunk.github.io/mkdocs-material/customization/?h=#additional-javascript
-extra_javascript:
-  - _extra/javascript/feedback.js
-  - _extra/javascript/init_kapa_widget.js
 
+# 注意：如果仓库里确实有这些文件再开启；没有就先保持注释，避免构建报 “找不到文件”
+# extra_css:
+#   - _extra/css/extra.css
+#   - _extra/css/macro-styles.css
+#   - _extra/css/templates-widget.css
+#   - _extra/css/workflow-demo.css
+#   - _extra/css/feedback.css
+# extra_javascript:
+#   - _extra/javascript/feedback.js
+#   - _extra/javascript/init_kapa_widget.js
+
+# 这里只能写真实存在的目录
 watch:
   - _snippets
   - _overrides
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#markdown-in-html
+
+markdown_extensions:
+  - abbr
+  - attr_list
   - md_in_html
   - meta
   - pymdownx.blocks.admonition:
-      types:
-        - note
-        - info
-        - tip
-        - question
-        - warning
-        - danger
-        # custom types
-        - details
+      types: [note, info, tip, question, warning, danger, details]
   - pymdownx.details
-  # https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator:
-        !!python/name:material.extensions.emoji.to_svg
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#highlight
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       linenums: true
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#inlinehilite
   - pymdownx.inlinehilite
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#keys
   - pymdownx.keys
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#snippets
   - pymdownx.snippets:
       auto_append:
         - _glossary/main.md
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#superfences Superfences is required for several other features. Always enable.
   - pymdownx.superfences:
-      # https://squidfunk.github.io/mkdocs-material/reference/diagrams/
       custom_fences:
         - name: mermaid
           class: mermaid
-          format:
-            !!python/name:pymdownx.superfences.fence_code_format
-      # https://facelessuser.github.io/pymdown-extensions/extensions/superfences/#preserve-tabs
+          format: !!python/name:pymdownx.superfences.fence_code_format
       preserve_tabs: true
   - pymdownx.tasklist:
       custom_checkbox: true
-  # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
   - pymdownx.tabbed:
       alternate_style: true
   - sane_lists
   - tables
-  # https://www.mkdocs.org/user-guide/writing-your-docs/#linking-to-pages
   - toc:
       permalink: "#"
+
 plugins:
-  # You need the info plugin for bug reports to Material theme
-  # But DO NOT ENABLE IT NORMALLY
-  # It causes Netlify builds to fail
-  # - info
   - search
   - exclude:
-      glob:
-       # - integrations/builtin/*
-  # https://squidfunk.github.io/mkdocs-material/reference/images/#lightbox
+      glob: []
   - glightbox:
       touchNavigation: false
       loop: false
@@ -152,35 +120,25 @@ plugins:
       draggable: false
       auto_caption: false
       caption_position: bottom
-  # https://mkdocs-macros-plugin.readthedocs.io/en/latest/
   - macros:
-      # https://mkdocs-macros-plugin.readthedocs.io/en/latest/advanced/#including-external-yaml-files
       include_yaml:
         - _yaml/data-functions.yml
       j2_block_start_string: "[[%"
       j2_block_end_string: "%]]"
       j2_variable_start_string: "[["
       j2_variable_end_string: "]]"
-  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/
   - tags:
       enabled: true
-  # https://squidfunk.github.io/mkdocs-material/plugins/privacy/
-  # This is enabled to automatically add `target="_blank"` to external links.
-  # Specifically, we needed some way to open nav links to external locations
-  # (like the main site) in new tabs
+  # 注意：Material 的 privacy 插件公开版只有 assets 选项；去掉 links / links_attr_map，避免告警
   - privacy:
       assets: false
-      links: true
-      links_attr_map:
-        target: _blank
-        rel: external
-  # https://github.com/pawamoy/mkdocs-llmstxt
   - llmstxt:
       markdown_description: |
         Documentation for n8n, a workflow automation platform. This file helps LLMs understand and use the documentation more effectively.
       full_output: llms-full.txt
-      # Include all Markdown files in the docs directory and subdirectories
       sections:
         All documentation:
           - "*.md"
+
+# 继续沿用你仓库里的导航文件
 INHERIT: ./nav.yml
